@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  api:
+    image: maven:3.9.6-eclipse-temurin-21-alpine
+    container_name: api-security-app
+    ports:
+      - "8180:8180"
+    env_file:
+      - example.env
+    volumes:
+      - .:/app
+      - ./data:/app/data
+    working_dir: /app
+    command: mvn spring-boot:run
+    restart: unless-stopped
+
+networks:
+  security-network:
+    driver: bridge

@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: api-security
+
+  datasource:
+    url: jdbc:h2:file:./data/securitydb;DB_CLOSE_DELAY=-1;NON_KEYWORDS=USER
+    driverClassName: org.h2.Driver
+    username: {DB_USERNAME}
+    password: {DB_PASSWORD}
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+api:
+  security:
+    jwt:
+      secret: ${JWT_SECRECT_KEY}
+      expiration-in-minutes: ${JWT_EXPIRATION_MINUTES}
+    brute-force:
+      max-attempts: ${BRUTE_FORCE_MAX_ATTEMPTS}
+      lock-time-minutes: ${BRUTE_FORCE_LOCK_TIME_MINUTES}
